@@ -17,7 +17,7 @@ public class actions {
 		Random rn = new Random();
 		return Action.get(rn.nextInt(Action.size()));
 	}
-	public String BrGoal(String alias){
+	public String BkGoal(String alias){
 		ArrayList<String> Action = new ArrayList<String>();
 		//int 
 		Action.add(alias + " arma y lanza un potente disparo desde 8 metros para batir al portero.");
@@ -50,7 +50,7 @@ public class actions {
 		Random rn = new Random();
 		return Action.get(rn.nextInt(Action.size()));
 	}
-	public String BrFail(String alias){
+	public String BkFail(String alias){
 		ArrayList<String> Action = new ArrayList<String>();
 		//int 
 		Action.add(alias + " pierde el balon");

@@ -13,7 +13,7 @@ public class player {
 		PMinutes=0;
 	}
 	
-	public player(String A,String N, int Y, int G, int C, int W, int B, int R)  {
+	public player(String A,String N, int Y, int G, int C, int W, int B, int R, int Gl, int M, int E)  {
 		setAlias(A);
 		setNationallity(N);
 		setAge(Y);
@@ -22,6 +22,9 @@ public class player {
 		setWG(W);
 		setBK(B);
 		setCR(R);
+		setGoals(Gl);
+		setMinutes(M);
+		setExclutions(E);
 		PGoals=0;
 		PExclutions=0;
 		PMinutes=0;
@@ -58,37 +61,61 @@ public class player {
 	private void setCR(int x) {
 		CR = x;
 	}
+	
+	private void setGoals(int x) {
+		Goals = x;
+	}
+	
+	private void setMinutes(int x) {
+		Minutes = x;
+	}
+	
+	private void setExclutions(int x) {
+		Exclutions = x;
+	}
 	// Procedure to get values
-	private String getAlias() {
+	public String getAlias() {
 		return Alias;
 	}
 	
-	private String getNationallity() {
+	public String getNationallity() {
 		return Nationallity;
 	}
 	
-	private int getAge() {
+	public int getAge() {
 		return Age;
 	}
 	
-	private int getGK() {
+	public int getGK() {
 		return GK;
 	}
 	
-	private int getCE() {
+	public int getCE() {
 		return CE;
 	}
 	
-	private int getWG() {
+	public int getWG() {
 		return WG;
 	}
 	
-	private int getBK() {
+	public int getBK() {
 		return BK;
 	}
 	
-	private int getCR() {
+	public int getCR() {
 		return CR;
+	}
+	
+	public int getGoals() {
+		return Goals;
+	}
+	
+	public int getMinutes() {
+		return Minutes;
+	}
+	
+	public int getExclutions() {
+		return Exclutions;
 	}
 	// Procedures 
 	public void Goal(){
@@ -116,18 +143,18 @@ public class player {
 				Avg = getGK();
 				break;
 			case 1:
-				Avg = getGK();
+			case 5:
+				Avg = getWG();
 				break;
 			case 2:
-				Avg = getGK();
+			case 4:
+				Avg = getBK();
 				break;
 			case 3:
-				Avg = getGK();
+				Avg = getCR();
 				break;
-			case 4:
-				Avg = getGK();
-				break;
-			default:
+			default :
+				Avg = getCE();
 				break;
 		}
 		return Avg;
