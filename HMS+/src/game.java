@@ -54,7 +54,7 @@ public class game {
 					} else {
 						attackTeam="Home";	
 					}
-					System.out.println(SAction+" => "+attackTeam);
+					System.out.println(SAction);
 					ChangePosession();
 				}
 				updateMinutes();
@@ -62,8 +62,8 @@ public class game {
 		}
 		System.out.println ("");
 		System.out.println ("Final del Partido <=> Marcador: "+ Home.getName() + " " + Home.getGoals() +" - " + Away.getGoals() +" " +Away.getName());
-		System.out.println ("Home: "+ Home.GetAVG());
-		System.out.println ("Away: "+ Away.GetAVG());
+		//System.out.println ("Home: "+ Home.GetAVG());
+		//System.out.println ("Away: "+ Away.GetAVG());
 		System.out.println ("");
 		FinallyReport();
 		saveToFile(Home);
@@ -209,20 +209,6 @@ public class game {
 	}
 	
 	private static void saveToFile(team T){
-		/*try{
-		    PrintWriter writer = new PrintWriter(Home.getName() + ".txt", "ANSII");
-		    writer.println(Home.Report());
-		    writer.close();
-		} catch (IOException e) {
-		   // do something
-		}
-		try{
-		    PrintWriter writer = new PrintWriter(Away.getName() + ".txt", "ANSII");
-		    writer.println(Away.Report());
-		    writer.close();
-		} catch (IOException e) {
-		   // do something
-		}*/
 		FileWriter fichero = null;
         PrintWriter pw = null;
         try
@@ -261,35 +247,44 @@ public class game {
             bf2.readLine();
         }
         jAli.clear();
-        for(i=0;i<13;i++){
+        for(i=0;i<7;i++){
         	sLineUp = bf2.readLine();
                jAli.add(sLineUp.substring(0, 13).trim());
         }
+        
         while ((STeam = bf.readLine())!=null) {
-            for(i=0; i<jAli.size()-1; i++){
-                if(jAli.get(i).equals(STeam.substring(0, 13).trim())){
-                    A=STeam.substring(0, 13).trim();
-                    N=STeam.substring(13, 17).trim();
-                    Y=Integer.parseInt(STeam.substring(17, 21).trim());
-                    GK=Integer.parseInt(STeam.substring(22, 26).trim());
-                    WG=Integer.parseInt(STeam.substring(26, 30).trim());
-                    BK=Integer.parseInt(STeam.substring(30, 34).trim());
-                    CR=Integer.parseInt(STeam.substring(34, 38).trim());
-                    CE=Integer.parseInt(STeam.substring(38, 42).trim());
-                    M=Integer.parseInt(STeam.substring(42, 48).trim());
-                    G=Integer.parseInt(STeam.substring(48, 54).trim());
-                    E=Integer.parseInt(STeam.substring(53, 58).trim());
-                    Random rn = new Random();
-                    if (GK<=1) { GK=rn.nextInt(10)+1; }
-                    if (WG<=1) { WG=rn.nextInt(10)+1; }
-                    if (BK<=1) { BK=rn.nextInt(10)+1; }
-                    if (CR<=1) { CR=rn.nextInt(10)+1; }
-                    if (CE<=1) { CE=rn.nextInt(10)+1; }
-                    E=0;
-                    e.AddPlayer(new player(A, N, Y, GK, CE, WG, BK, CR,G,M,E));
-                    i = jAli.size();
-                }
-            }   
+            A=STeam.substring(0, 13).trim();
+            N=STeam.substring(13, 17).trim();
+            Y=Integer.parseInt(STeam.substring(17, 21).trim());
+            GK=Integer.parseInt(STeam.substring(22, 26).trim());
+            WG=Integer.parseInt(STeam.substring(26, 30).trim());
+            BK=Integer.parseInt(STeam.substring(30, 34).trim());
+            CR=Integer.parseInt(STeam.substring(34, 38).trim());
+            CE=Integer.parseInt(STeam.substring(38, 42).trim());
+            M=Integer.parseInt(STeam.substring(42, 48).trim());
+            G=Integer.parseInt(STeam.substring(48, 54).trim());
+            E=Integer.parseInt(STeam.substring(53, 58).trim());
+            Random rn = new Random();
+            if (GK<1) { GK=rn.nextInt(10)+1; }
+            if (WG<1) { WG=rn.nextInt(10)+1; }
+            if (BK<1) { BK=rn.nextInt(10)+1; }
+            if (CR<1) { CR=rn.nextInt(10)+1; }
+            if (CE<1) { CE=rn.nextInt(10)+1; }
+            E=0;
+            for (i=0; i<jAli.size();i++){
+	            if(jAli.get(i).equals(STeam.substring(0, 13).trim())){
+	            	if (i==0){
+	            		if (GK<=1) { GK=rn.nextInt(10)+1; }
+		                WG=1;
+		                BK=1; 
+		                CR=1; 
+		                CE=1; 
+	                }
+	            	e.CreateLineUp(new player(A, N, Y, GK, CE, WG, BK, CR,G,M,E));
+	            	
+	            }     
+            }
+            e.AddPlayer(new player(A, N, Y, GK, CE, WG, BK, CR,G,M,E));
         }
      }
 }

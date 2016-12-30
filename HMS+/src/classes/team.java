@@ -7,12 +7,15 @@ public class team {
 	private int Goals;
 	private String Name;
 	private ArrayList<player> players = new ArrayList<player>();
+	private ArrayList<player> lineup = new ArrayList<player>();
 	public team(){
-		Goals=0;	
+		Goals=0;
+		lineup = new ArrayList<player>();
 	}
 	public team(String N){
 		Name=N;
-		Goals=0;	
+		Goals=0;
+		lineup = new ArrayList<player>();
 	}
 	// Procedure to assign values
 	// Procedure to get values
@@ -29,19 +32,30 @@ public class team {
 	public void AddPlayer(player p){
 		players.add(p);
 	}
+	public void CreateLineUp(player p){
+		lineup.add(p);
+	}
 	public void Goal(int P){
-		players.get(P).Goal();
+		for (int i=0;i<players.size()-1;i++){
+			if (lineup.get(P).getAlias().equals(players.get(i).getAlias())){
+				players.get(i).Goal();
+			}
+		}
 		Goals++;
 	}
 	public void UpdateMinutes(){
 		for(int P=0; P<7; P++){
-			players.get(P).Minute();
+			for (int i=0;i<players.size()-1;i++){
+				if (lineup.get(P).getAlias().equals(players.get(i).getAlias())){
+					players.get(i).Minute();
+				}
+			}
 		}
 	}
 	public int GetAVG(){
 		int AVG=0;
 		for(int P=0; P<7; P++){
-			AVG=AVG+players.get(P).GetAVG(P);
+			AVG=AVG+lineup.get(P).GetAVG(P);
 		}
 		return (int) Math.round(AVG*2);
 	}
