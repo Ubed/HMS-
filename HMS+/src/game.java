@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.swing.DefaultListModel;
 
@@ -21,6 +25,8 @@ public class game {
 	private static int possesion;
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// TODO Auto-generated method stub
+		String fileName = "HMS.db";
+		String url = "jdbc:sqlite:./db/" + fileName;
 		int nactions=0;
 		Random rn = new Random();
 		possesion = rn.nextInt(2);
@@ -32,6 +38,16 @@ public class game {
 //		loadTeam(Away);
 		fillTeam(Home);
 		fillTeam(Away);
+		/*try (Connection conn = DriverManager.getConnection(url)) {
+            if (conn != null) {
+                DatabaseMetaData meta = conn.getMetaData();
+                System.out.println("The driver name is " + meta.getDriverName());
+                System.out.println("A new database has been created.");
+            }
+ 
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }*/
 		for (int p=1; p<=2;p++){
 			if (p==1){ // Printing start first time
 				System.out.println ("Primera parte <=> Marcador: "+ Home.getName() + " " + Home.getGoals() +" - " + Away.getGoals() +" " +Away.getName());
