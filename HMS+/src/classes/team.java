@@ -5,7 +5,7 @@ import java.util.List;
 
 public class team {
 	private int Goals;
-	private String Name;
+	private String Name, Short_name;
 	private ArrayList<player> players = new ArrayList<player>();
 	private ArrayList<player> lineup = new ArrayList<player>();
 	public team(){
@@ -13,14 +13,19 @@ public class team {
 		lineup = new ArrayList<player>();
 	}
 	public team(String N){
-		Name=N;
+		Short_name=N;
+		setName(N);
 		Goals=0;
 		lineup = new ArrayList<player>();
 	}
 	// Procedure to assign values
 	// Procedure to get values
+	public void setName(String N){Name=N;}
 	public String getName(){
 		return Name;
+	}
+	public String getShortName(){
+		return Short_name;
 	}
 	public String getAlias(int P){
 		return players.get(P).getAlias();

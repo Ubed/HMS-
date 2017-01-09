@@ -13,7 +13,9 @@ import java.util.Random;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.DefaultListModel;
 
@@ -38,16 +40,25 @@ public class game {
 //		loadTeam(Away);
 		fillTeam(Home);
 		fillTeam(Away);
-		/*try (Connection conn = DriverManager.getConnection(url)) {
+		try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
-                System.out.println("The driver name is " + meta.getDriverName());
-                System.out.println("A new database has been created.");
+                //System.out.println("The driver name is " + meta.getDriverName());
+                System.out.println("Creada la BBDD por primera vez");
+                String Query="Select long_name from teams where short_name='"+Home.getShortName()+"';";
+                ResultSet LongName = select(url,Query);
+                while (LongName.next()) { Home.setName(LongName.getString("long_name")) ; System.out.println(LongName.getString("long_name"));}
+                LongName.close();
+                System.out.println(Home.getName());
+                Query="Select long_name from teams where short_name='"+Home.getShortName()+"';";
+                LongName = select(url,Query);
+                while (LongName.next()) { Away.setName(LongName.getString("long_name")) ; }
+                LongName.close();
+                System.out.println(Away.getName());
             }
- 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }*/
+        }
 		for (int p=1; p<=2;p++){
 			if (p==1){ // Printing start first time
 				System.out.println ("Primera parte <=> Marcador: "+ Home.getName() + " " + Home.getGoals() +" - " + Away.getGoals() +" " +Away.getName());
@@ -303,4 +314,23 @@ public class game {
             e.AddPlayer(new player(A, N, Y, GK, CE, WG, BK, CR,G,M,E));
         }
      }
+	 private static Connection connect(String url) {
+	        // SQLite connection string
+		 	        Connection conn = null;
+	        try {
+	            conn = DriverManager.getConnection(url);
+	        } catch (SQLException e) {
+	            System.out.println(e.getMessage());
+	        }
+	        return conn;
+	    }
+	 
+	public static ResultSet select(String url, String sql){      
+		try (Connection conn = connect(url); Statement stmt  = conn.createStatement(); ResultSet rs    = stmt.executeQuery(sql)){ 
+			return rs;
+		} catch (SQLException e) {
+		    System.out.println(e.getMessage());
+		    return null;
+		}
+	}
 }

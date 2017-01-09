@@ -21,6 +21,8 @@ public class actions {
 		ArrayList<String> Action = new ArrayList<String>();
 		//int 
 		Action.add(alias + " arma y lanza un potente disparo desde 8 metros para batir al portero.");
+		Action.add(alias + " se eleva tras un cruce con el central.");
+		Action.add(alias + " penetra entre la defensa para anorta desde 6 metros.");
 		Random rn = new Random();
 		return Action.get(rn.nextInt(Action.size()));
 	}
@@ -28,6 +30,8 @@ public class actions {
 		ArrayList<String> Action = new ArrayList<String>();
 		//int 
 		Action.add(alias + " recibe un pase filtrado del central y bate al portero.");
+		Action.add(alias + " se abre un hueco entre la defensa para recibir un pase y batir al portero.");
+		Action.add(alias + " recibe un pase picado y se da la vuelta para anotar.");
 		Random rn = new Random();
 		return Action.get(rn.nextInt(Action.size()));
 	}
@@ -35,6 +39,8 @@ public class actions {
 		ArrayList<String> Action = new ArrayList<String>();
 		//int 
 		Action.add(alias + " anota un impresionante gol con un disparo de cadera");
+		Action.add(alias + " saca un pontente disparo sin saltar que se cuela por la escuadra.");
+		Action.add(alias + " finta a su par y se coloca en 6 metros para batir el portero.");
 		Random rn = new Random();
 		return Action.get(rn.nextInt(Action.size()));
 	}
